@@ -44,7 +44,7 @@
         android:inputType="textPersonName"
         android:text="Name"
         android:ems="10"
-        android:id="@+id/projectname" />
+        android:id="@+id/name" />
 
     <TextView
         android:text="Due date (day-month-year)"
