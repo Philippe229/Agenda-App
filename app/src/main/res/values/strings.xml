@@ -1,3 +1,12 @@
 <resources>
     <string name="app_name">My Application</string>
+
+    <string name="select_frequency">How often do you want to be reminded?</string>
+    <string-array name="frequency">
+        <item>twice a day</item>
+        <item>once a day</item>
+        <item>every 2nd day</item>
+        <item>once a week</item>
+    </string-array>
+
 </resources>
