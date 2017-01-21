@@ -19,6 +19,7 @@ public class ToDoAdd extends AppCompatActivity {
         spinner = (Spinner)findViewById(R.id.spinner);
         adapter = ArrayAdapter.createFromResource(this, R.array.frequency, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        spinner.setSelection(0);
         spinner.setAdapter(adapter);
         spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener(){
 
