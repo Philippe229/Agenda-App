@@ -1,5 +1,9 @@
 package com.example.myapplication;
 
+import android.app.AlarmManager;
+import android.app.PendingIntent;
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -14,7 +18,11 @@ import android.widget.Toast;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
+import java.util.GregorianCalendar;
+
 public class ToDoAdd extends AppCompatActivity {
+
     private Spinner spinner;
 
     private Button saveNewToDoButton;
@@ -75,6 +83,9 @@ public class ToDoAdd extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 saveTextFieldsToDatabase();
+
+                setAlarm( v);
+
                 finish();
             }
         });
@@ -106,4 +117,56 @@ public class ToDoAdd extends AppCompatActivity {
         databaseReference.child(identifier).push().setValue(info);
 
     }
+
+
+    public void setAlarm(View v) {
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
+        ArrayList<PendingIntent> intentArray = new ArrayList<PendingIntent>(3);
+
+       String alarmDate = ((EditText) findViewById(R.id.duedate)).getText().toString();
+
+        String[] id = identifier.split("-");
+        long dayid = Long.parseLong(id[0]);
+        long monthid = Long.parseLong(id[1]);
+        long yearid = Long.parseLong(id[2]);
+
+        Long idend = dayid*24*60*60*1000+ monthid*30*60*60*1000+ yearid*365*60*60*1000;
+
+
+        String[] parts = alarmDate.split("-");
+
+        long day = Long.parseLong(parts[0]);
+        long month = Long.parseLong(parts[1]);
+        long year = Long.parseLong(parts[2]);
+
+        Long date = day*24*60*60*1000+ month*30*60*60*1000+ year*365*60*60*1000;
+
+        int i = 0;
+
+        for (i = 0; i <intentArray.size(); i++){
+            if (intentArray.get(i) == null)
+                break;
+        }
+
+
+        Long currentTime = new GregorianCalendar().getTimeInMillis();
+
+        if ((idend -date) < currentTime)
+            return;
+
+        Long alertTime = new GregorianCalendar().getTimeInMillis() + (idend-date);
+
+
+        Intent alertIntent = new Intent(this, AlertReceiver.class);
+
+        PendingIntent pendingIntent = PendingIntent.getBroadcast(this, i, alertIntent, PendingIntent.FLAG_UPDATE_CURRENT);
+
+        alarmManager.set(AlarmManager.RTC_WAKEUP, alertTime, pendingIntent);
+
+        intentArray.add(pendingIntent);
+
+
+
+    }
+
 }
