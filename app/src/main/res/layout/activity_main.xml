@@ -24,8 +24,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:id="@+id/button"
-
-        android:onClick="fireNotification" />
+        android:onClick="setAlarm" />
 
     <Button
         android:text="Priority List"

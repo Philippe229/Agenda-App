@@ -1,5 +1,7 @@
 package com.example.myapplication;
 
+import android.app.AlarmManager;
+import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.support.v4.app.TaskStackBuilder;
@@ -18,12 +20,10 @@ import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 
+import java.util.GregorianCalendar;
+
 public class MainActivity extends AppCompatActivity {
 
-    //------------------Reminder---------------------------
-    NotificationCompat.Builder notification;
-    private static final int uniqueID = 000000;
-//-----------------------------------------------------
 
     private CalendarView calendar;
     private Button toDoListButton;
@@ -61,12 +61,6 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        //------------------Reminders--------------------------------------
-        notification = new NotificationCompat.Builder(this);
-
-
-        notification.setAutoCancel(true);
-        //--------------------------------------------------------
 
     }
 
@@ -80,43 +74,22 @@ public class MainActivity extends AppCompatActivity {
         super.onStop();
     }
 
-    public void fireNotification(View view) {
-        notification.setSmallIcon(R.mipmap.ic_launcher);
-        notification.setContentTitle("My notification");
-        notification.setContentText("Hello World!");
-
-        //for displaying the time associated with a notification
-        notification.setWhen(System.currentTimeMillis());
-
-        // To trigger notifications at certain times use AlarmManager
-
-        // Creates an explicit intent for an Activity in your app
-        Intent resultIntent = new Intent(this, MainActivity.class);
 
 
-        //  notification.setContentIntent(pendingIntent);
-        // The stack builder object will contain an artificial back stack for the
-        // started Activity.
-        // This ensures that navigating backward from the Activity leads out of
-        // your application to the Home screen.
-        TaskStackBuilder stackBuilder = TaskStackBuilder.create(this);
-        // Adds the back stack for the Intent (but not the Intent itself)
-        stackBuilder.addParentStack(MainActivity.class);
-        // Adds the Intent that starts the Activity to the top of the stack
-        stackBuilder.addNextIntent(resultIntent);
-        PendingIntent resultPendingIntent =
-                stackBuilder.getPendingIntent(
-                        0,
-                        PendingIntent.FLAG_UPDATE_CURRENT
-                );
-        notification.setContentIntent(resultPendingIntent);
+    public void setAlarm(View v) {
 
+        Long alertTime = new GregorianCalendar().getTimeInMillis() + 5*1000;
 
-        NotificationManager nm = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
-        // ID to update notification later
-        nm.notify(uniqueID, notification.build());
+        Intent alertIntent = new Intent(this, AlertReceiver.class);
 
-        //--------------------------------------------------------
+        AlarmManager alarmManager = (AlarmManager) getSystemService(Context.ALARM_SERVICE);
 
+        alarmManager.set(AlarmManager.RTC_WAKEUP, alertTime, PendingIntent.getBroadcast(this, 1, alertIntent, PendingIntent.FLAG_UPDATE_CURRENT));
     }
+
+
+
+
+
+
 }
