@@ -1,9 +1,9 @@
 <resources>
-    <string name="app_name">My Application</string>
+    <string name="app_name">Agenda</string>
 
     <string name="select_frequency">When do you want to start receiving warnings?</string>
     <string-array name="frequency">
-        <item>1 day before</item>
+        <item>1 day</item>
         <item>2 days</item>
         <item>1 week</item>
         <item>2 weeks</item>

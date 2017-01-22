@@ -6,12 +6,14 @@ public class TextFieldsInformation {
     public String timeNeeded;
     public String weight;
     public String courseCredits;
+    public String frequency;
 
-    public TextFieldsInformation(String nameArg, String dueDateArg, String timeNeededArg, String weightArg, String courseCreditsArg, String s) {
+    public TextFieldsInformation(String nameArg, String dueDateArg, String timeNeededArg, String weightArg, String courseCreditsArg, String frequencyArg) {
         name = nameArg;
         dueDate = dueDateArg;
         timeNeeded = timeNeededArg;
         weight = weightArg;
         courseCredits = courseCreditsArg;
+        frequency = frequencyArg;
     }
 }

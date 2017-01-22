@@ -20,14 +20,19 @@ import com.google.android.gms.appindexing.AppIndex;
 import com.google.android.gms.appindexing.Thing;
 import com.google.android.gms.common.api.GoogleApiClient;
 
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.util.GregorianCalendar;
 
 public class MainActivity extends AppCompatActivity {
-
-
     private CalendarView calendar;
     private Button toDoListButton;
     private Button PriorityListButton;
+
+    private int dayOfMonth;
+    private int month;
+    private int year;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,11 +41,18 @@ public class MainActivity extends AppCompatActivity {
 
         calendar = (CalendarView) findViewById(R.id.calendar);
 
+        final Calendar c = Calendar.getInstance();
+        year = c.get(Calendar.YEAR);
+        month = c.get(Calendar.MONTH) + 1;
+        dayOfMonth = c.get(Calendar.DAY_OF_MONTH);
+
         calendar.setOnDateChangeListener(new CalendarView.OnDateChangeListener() {
             @Override
-            public void onSelectedDayChange(CalendarView view, int year, int month, int dayOfMonth) {
-                int date = dayOfMonth;
-                Toast.makeText(getApplicationContext(), dayOfMonth + "/" + month + "/" + year, Toast.LENGTH_LONG).show();
+            public void onSelectedDayChange(CalendarView view, int yearArg, int monthArg, int dayOfMonthArg) {
+                dayOfMonth = dayOfMonthArg;
+                month = monthArg + 1;
+                year = yearArg;
+                Toast.makeText(getApplicationContext(), dayOfMonthArg + "/" + monthArg + "/" + yearArg, Toast.LENGTH_LONG).show();
             }
         });
 
@@ -49,6 +61,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(v.getContext(), ToDoList.class);
+                intent.putExtra("dayOfMonth", dayOfMonth);
+                intent.putExtra("month", month);
+                intent.putExtra("year", year);
                 startActivity(intent);
             }
         });
@@ -61,7 +76,6 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
 
     }
 
@@ -87,10 +101,4 @@ public class MainActivity extends AppCompatActivity {
 
         alarmManager.set(AlarmManager.RTC_WAKEUP, alertTime, PendingIntent.getBroadcast(this, 1, alertIntent, PendingIntent.FLAG_UPDATE_CURRENT));
     }
-
-
-
-
-
-
 }

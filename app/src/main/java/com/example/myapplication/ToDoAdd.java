@@ -27,8 +27,11 @@ public class ToDoAdd extends AppCompatActivity {
     private EditText timeNeededText;
     private EditText weightText;
     private EditText courseCreditsText;
-    private TextView frequencyText;
+    private Spinner spinnertext;
+
     private DatabaseReference databaseReference;
+
+    private String identifier;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,6 +39,11 @@ public class ToDoAdd extends AppCompatActivity {
         setContentView(R.layout.activity_to_do_add);
 
         databaseReference = FirebaseDatabase.getInstance().getReference();
+
+        Bundle extras = getIntent().getExtras();
+        if (extras != null) {
+            identifier = extras.getString("identifier");
+        }
 
         instantiateSpinner();
         instantiateButtons();
@@ -86,16 +94,16 @@ public class ToDoAdd extends AppCompatActivity {
         timeNeededText = (EditText) findViewById(R.id.timeneeded);
         weightText = (EditText) findViewById(R.id.weight);
         courseCreditsText = (EditText) findViewById(R.id.coursecredits);
-        frequencyText = (TextView) findViewById(R.id.frequency);
+        spinnertext = (Spinner) findViewById(R.id.spinner);
 
         TextFieldsInformation info = new TextFieldsInformation(nameText.getText().toString(),
                 dueDateText.getText().toString(),
                 timeNeededText.getText().toString(),
                 weightText.getText().toString(),
                 courseCreditsText.getText().toString(),
-                frequencyText.getText().toString());
+                spinnertext.getSelectedItem().toString());
 
-        databaseReference.child("Placeholder date").push().setValue(info);
+        databaseReference.child(identifier).push().setValue(info);
 
     }
 }
