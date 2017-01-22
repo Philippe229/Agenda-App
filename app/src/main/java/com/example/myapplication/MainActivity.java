@@ -1,6 +1,7 @@
 package com.example.myapplication;
 
 import android.content.Intent;
+import android.net.Uri;
 import android.support.v4.app.TaskStackBuilder;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -12,15 +13,21 @@ import android.widget.Toast;
 import android.app.NotificationManager;
 import android.app.PendingIntent;
 
+import com.google.android.gms.appindexing.Action;
+import com.google.android.gms.appindexing.AppIndex;
+import com.google.android.gms.appindexing.Thing;
+import com.google.android.gms.common.api.GoogleApiClient;
+
 public class MainActivity extends AppCompatActivity {
 
-//------------------Reminder---------------------------
+    //------------------Reminder---------------------------
     NotificationCompat.Builder notification;
     private static final int uniqueID = 000000;
 //-----------------------------------------------------
 
     private CalendarView calendar;
     private Button toDoListButton;
+    private Button PriorityListButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,12 +52,22 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        PriorityListButton = (Button) findViewById(R.id.PriorityList);
+        PriorityListButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(v.getContext(), PriorityList.class);
+                startActivity(intent);
+            }
+        });
+
         //------------------Reminders--------------------------------------
         notification = new NotificationCompat.Builder(this);
 
 
         notification.setAutoCancel(true);
         //--------------------------------------------------------
+
     }
 
     @Override

@@ -9,6 +9,7 @@
         <item>once a week</item>
     </string-array>
     <string name="PriorityList">How often do you want to be reminded?</string>
+
     <string-array name="priority">
         <item>due date</item>
         <item>weight</item>
