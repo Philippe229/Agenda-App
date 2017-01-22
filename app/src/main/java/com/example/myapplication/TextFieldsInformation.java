@@ -7,7 +7,7 @@ public class TextFieldsInformation {
     public String weight;
     public String courseCredits;
 
-    public TextFieldsInformation(String nameArg, String dueDateArg, String timeNeededArg, String weightArg, String courseCreditsArg) {
+    public TextFieldsInformation(String nameArg, String dueDateArg, String timeNeededArg, String weightArg, String courseCreditsArg, String s) {
         name = nameArg;
         dueDate = dueDateArg;
         timeNeeded = timeNeededArg;

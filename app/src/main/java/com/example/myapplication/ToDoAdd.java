@@ -8,6 +8,7 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.google.firebase.database.DatabaseReference;
@@ -26,7 +27,7 @@ public class ToDoAdd extends AppCompatActivity {
     private EditText timeNeededText;
     private EditText weightText;
     private EditText courseCreditsText;
-
+    private TextView frequencyText;
     private DatabaseReference databaseReference;
 
     @Override
@@ -85,13 +86,14 @@ public class ToDoAdd extends AppCompatActivity {
         timeNeededText = (EditText) findViewById(R.id.timeneeded);
         weightText = (EditText) findViewById(R.id.weight);
         courseCreditsText = (EditText) findViewById(R.id.coursecredits);
-        spinner = (Spinner) findViewById(R.id.spinner);
+        frequencyText = (TextView) findViewById(R.id.frequency);
 
         TextFieldsInformation info = new TextFieldsInformation(nameText.getText().toString(),
                 dueDateText.getText().toString(),
                 timeNeededText.getText().toString(),
                 weightText.getText().toString(),
-                courseCreditsText.getText().toString());
+                courseCreditsText.getText().toString(),
+                frequencyText.getText().toString());
 
         databaseReference.child("Placeholder date").push().setValue(info);
 
