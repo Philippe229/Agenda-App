@@ -8,7 +8,14 @@
         <item>every 2nd day</item>
         <item>once a week</item>
     </string-array>
-
+    <string name="PriorityList">How often do you want to be reminded?</string>
+    <string-array name="priority">
+        <item>due date</item>
+        <item>weight</item>
+        <item>course credits</item>
+        <item>days until deadline</item>
+        <item>days needed to complete</item>
+    </string-array>
 
 
 </resources>
