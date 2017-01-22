@@ -85,6 +85,7 @@ public class ToDoAdd extends AppCompatActivity {
         timeNeededText = (EditText) findViewById(R.id.timeneeded);
         weightText = (EditText) findViewById(R.id.weight);
         courseCreditsText = (EditText) findViewById(R.id.coursecredits);
+        spinner = (Spinner) findViewById(R.id.spinner);
 
         TextFieldsInformation info = new TextFieldsInformation(nameText.getText().toString(),
                 dueDateText.getText().toString(),
