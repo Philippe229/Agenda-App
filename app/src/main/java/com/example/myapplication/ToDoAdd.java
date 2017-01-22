@@ -92,6 +92,7 @@ public class ToDoAdd extends AppCompatActivity {
                 weightText.getText().toString(),
                 courseCreditsText.getText().toString());
 
-        databaseReference.child("Placeholder date").setValue(info);
+        databaseReference.child("Placeholder date").push().setValue(info);
+
     }
 }

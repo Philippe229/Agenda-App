@@ -1,9 +1,5 @@
 package com.example.myapplication;
 
-/**
- * Created by Philippe on 21/01/2017.
- */
-
 public class TextFieldsInformation {
     public String name;
     public String dueDate;
