@@ -19,15 +19,13 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentLeft="true"
-            android:id="@+id/frequency"
-            />
+            android:id="@+id/frequency" />
         <Spinner
             android:id="@+id/spinner"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignParentRight="true"
-            android:layout_toRightOf="@id/frequency"
-            >
+            android:layout_toRightOf="@id/frequency">
         </Spinner>
     </LinearLayout>
 
@@ -102,10 +100,12 @@
         android:ems="10"
         android:id="@+id/coursecredits" />
 
+    <!-- Buttons -->
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center">
+
         <Button
             android:id="@+id/saveNewToDoButton"
             android:layout_width="wrap_content"

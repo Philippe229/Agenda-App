@@ -1,39 +1,41 @@
 package com.example.myapplication;
 
-import android.os.Environment;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import org.w3c.dom.Attr;
-import org.w3c.dom.Document;
-import org.w3c.dom.Element;
-
-import java.io.File;
-import java.io.FileOutputStream;
-
-import javax.xml.parsers.DocumentBuilder;
-import javax.xml.parsers.DocumentBuilderFactory;
-import javax.xml.transform.Transformer;
-import javax.xml.transform.TransformerFactory;
-import javax.xml.transform.dom.DOMSource;
-import javax.xml.transform.stream.StreamResult;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 public class ToDoAdd extends AppCompatActivity {
     private Spinner spinner;
+
     private Button saveNewToDoButton;
     private Button cancelNewToDoButton;
+
     private ArrayAdapter<CharSequence> adapter;
+
+    private EditText nameText;
+    private EditText dueDateText;
+    private EditText timeNeededText;
+    private EditText weightText;
+    private EditText courseCreditsText;
+
+    private DatabaseReference databaseReference;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_to_do_add);
+
+        databaseReference = FirebaseDatabase.getInstance().getReference();
+
         instantiateSpinner();
         instantiateButtons();
     }
@@ -63,6 +65,7 @@ public class ToDoAdd extends AppCompatActivity {
         saveNewToDoButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                saveTextFieldsToDatabase();
                 finish();
             }
         });
@@ -76,4 +79,19 @@ public class ToDoAdd extends AppCompatActivity {
         });
     }
 
+    private void saveTextFieldsToDatabase() {
+        nameText = (EditText) findViewById(R.id.name);
+        dueDateText = (EditText) findViewById(R.id.duedate);
+        timeNeededText = (EditText) findViewById(R.id.timeneeded);
+        weightText = (EditText) findViewById(R.id.weight);
+        courseCreditsText = (EditText) findViewById(R.id.coursecredits);
+
+        TextFieldsInformation info = new TextFieldsInformation(nameText.getText().toString(),
+                dueDateText.getText().toString(),
+                timeNeededText.getText().toString(),
+                weightText.getText().toString(),
+                courseCreditsText.getText().toString());
+
+        databaseReference.child("Placeholder date").setValue(info);
+    }
 }
