@@ -40,7 +40,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Name"
+        android:text=""
         android:ems="10"
         android:id="@+id/name" />
 
@@ -54,7 +54,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Date"
+        android:text=""
         android:ems="10"
         android:id="@+id/duedate" />
 
@@ -68,7 +68,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Time"
+        android:text=""
         android:ems="10"
         android:id="@+id/timeneeded" />
 
@@ -82,7 +82,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Weight"
+        android:text=""
         android:ems="10"
         android:id="@+id/weight" />
 
@@ -96,7 +96,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:text="Course Credits"
+        android:text=""
         android:ems="10"
         android:id="@+id/coursecredits" />
 
